@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="main.css" />
+    <script src="main.js"></script>
+    <title>Task List</title>
+</head>
+<body>
+    <header>
+        <h1>Task List</h1>
+        <form id="new-task-form">
+            <input
+                autocomplete="off"
+                type="text"
+                id="new-task-input"
+                placeholder="Write your new task here" />
+            <button
+                type="submit"
+                id="new-task-submit">
+                <div>
+                    <span class="material-icons">add_circle</span>
+                    <span>Add task</span>
+                </div>
+            </button>
+        </form>
+    </header>
+    <main>
+        <section class="task-list">
+            <h2>Tasks</h2>
+            <div id="tasks">
+                <div class="task">
+                    <div class="content">
+                        <input
+                            type="text" 
+                            class="text"
+                            value="My next task"
+                            readonly />
+                    </div>
+                    <div class="actions">
+                        <button class="edit"
+                            ><div>
+                                <span class="material-icons">edit</span>
+                                <span>Edit</span>
+                            </div>
+                        </button>
+                        <button class="delete"
+                            ><div>
+                                <span class="material-icons">delete</span>
+                                <span>Delete</span>
+                            </div>
+                        </button>
+                    </div>
+                    
+                </div>
+                <div class="task">
+                    <div class="content">
+                        <input
+                            type="text" 
+                            class="text"
+                            value="My next task"
+                             />
+                    </div>
+                    <div class="actions">
+                        <button class="edit"
+                            ><div>
+                                <span class="material-icons">edit</span>
+                                <span>Edit</span>
+                            </div>
+                        </button>
+                        <button class="delete"
+                            ><div>
+                                <span class="material-icons">delete</span>
+                                <span>Delete</span>
+                            </div>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+</body>
+</html>
