@@ -10,13 +10,13 @@ window.addEventListener('load', () => {
         if (!task) {
             alert("Please input the task");
             return;
+        } else {
+            const task_el = create_task_list_el(task);
+    
+            tasks_list_el.appendChild(task_el);
+            input.value = '';
         }
-
-        const task_el = create_task_list_el(task);
-
-        tasks_list_el.appendChild(task_el);
-
-    })
+    });
 });
 
 function create_task_list_el(task) {
@@ -24,8 +24,6 @@ function create_task_list_el(task) {
     const task_content_el = document.createElement('div');
     const task_input_el = document.createElement('input');
     const task_actions_el = document.createElement('div');
-    // const task_edit_el = create_task_btn('edit');
-    // const task_delete_el = create_task_btn('delete');
 
     task_el.classList.add('task');
     task_content_el.classList.add('content');
@@ -41,33 +39,10 @@ function create_task_list_el(task) {
     task_content_el.appendChild(task_input_el);
     task_el.appendChild(task_content_el);
     task_el.appendChild(task_actions_el);
+    create_task_btn_events(task_el);
 
     return task_el;
-}
-
-// function create_task_actions_el() {
-//     const task_actions_div = document.createElement('div');
-//     const task_edit_el = document.createElement('button');
-//     const task_del_el = document.createElement('button');
-// }
-
-// function create_task_edit_el() {
-//     const task_edit_btn_el = document.createElement('button');
-//     const task_edit_icon_el = document.createElement('span');
-//     const task_edit_text_el = document.createElement('span');
-//     const task_edit_text_container = document.createElement('div');
-
-//     task_edit_btn_el.classList.add('edit');
-//     task_edit_icon_el.classList.add('material-icons');
-//     task_edit_icon_el.innerHTML = 'edit';
-
-//     task_edit_text_el.innerHTML = 'edit';
-//     task_edit_text_container.appendChild(task_edit_text_el);
-//     task_edit_text_container.appendChild(task_edit_icon_el);
-//     task_edit_btn_el.appendChild(task_edit_text_container);
-
-//     return task_edit_text_container;
-// }
+};
 
 function create_task_btn_el(text) {
     const task_btn_el = document.createElement('button');
@@ -85,4 +60,31 @@ function create_task_btn_el(text) {
     task_btn_el.appendChild(task_text_container);
 
     return task_btn_el;
-}
+};
+
+function create_task_btn_events(task_el) {
+    const task_edit_btn = task_el.querySelector('.actions button.edit');
+    const task_edit_icon_el = task_el.querySelector('.actions button.edit .material-icons');
+    const task_edit_text = task_el.querySelector('.actions button.edit div').lastChild;
+    const task_del_btn = task_el.querySelector('.actions button.delete');
+    const task_input_el = task_el.querySelector('.content input.text');
+    const task_lists_el = document.querySelector('#tasks');
+
+    task_edit_btn.addEventListener('click', () => {
+        if (task_edit_text.innerText == 'Edit') {
+            task_edit_icon_el.innerText = 'save';
+            task_edit_text.innerText = 'save';
+            task_input_el.removeAttribute('readonly');
+            task_edit_btn.classList.add('save');
+        } else {
+            task_edit_icon_el.innerText = 'edit';
+            task_edit_text.innerText = 'edit';
+            task_input_el.setAttribute('readonly', 'readonly');
+            task_edit_btn.classList.remove('save');
+        }
+    });
+
+    task_del_btn.addEventListener('click', () => {
+        task_lists_el.removeChild(task_el);
+    });
+};
