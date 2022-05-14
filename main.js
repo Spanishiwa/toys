@@ -7,19 +7,16 @@ window.addEventListener('load', () => {
         e.preventDefault();
         const task = input.value;
 
-        if (!task) {
-            alert("Please input the task");
-            return;
-        } else {
+        if (input.reportValidity) {
             const task_el = create_task_list_el(task);
     
             tasks_list_el.appendChild(task_el);
-            input.value = '';
+            form.reset();
         }
     });
 });
 
-function create_task_list_el(task) {
+const create_task_list_el = (task) => {
     const task_el = document.createElement('div');
     const task_content_el = document.createElement('div');
     const task_input_el = document.createElement('input');
@@ -44,12 +41,13 @@ function create_task_list_el(task) {
     return task_el;
 };
 
-function create_task_btn_el(text) {
+const create_task_btn_el = (text) => {
     const task_btn_el = document.createElement('button');
     const task_icon_el = document.createElement('span');
     const task_text_el = document.createElement('span');
     const task_text_container = document.createElement('div');
 
+    task_btn_el.type = 'button';
     task_btn_el.classList.add(text);
     task_icon_el.classList.add('material-icons');
     task_icon_el.innerHTML = text;
@@ -62,7 +60,7 @@ function create_task_btn_el(text) {
     return task_btn_el;
 };
 
-function create_task_btn_events(task_el) {
+const create_task_btn_events = (task_el) => {
     const task_edit_btn = task_el.querySelector('.actions button.edit');
     const task_edit_icon_el = task_el.querySelector('.actions button.edit .material-icons');
     const task_edit_text = task_el.querySelector('.actions button.edit div').lastChild;

@@ -1,17 +1,17 @@
 :root {
-    --dark: #616E7C; /* 500 */
-    --darker: #52606D; /* 600 */
-    --darkest: #323F4B; /* 800 */
-    /* 100: #E4E7EB; 700: #3E4C59; 800: #323F4B; 900: #1F2933; */
-    --light: #7B8794; /* 400 */
-    --lighter: #9AA5B1; /* 300 */
-    --lightest: #CBD2D9; /* 200 */
+    --dark: #7B8794; /* 400 */
+    --darker: #616E7C; /* 500 */
+    --darkest: #52606D; /* 600 */
+    --light: #9AA5B1; /* 300 */
+    --lighter: #CBD2D9; /* 200 */
+    --lightest: #E4E7EB; /* 100 */
+    --gwhite: #F5F7FA; /* 50 */
     --primary: #3f51b5;
     --primary-light: #757de8;
     --primary-dark: #002984;
-    --secondary: #D32F2F;
+    --secondary: #c25000;
     --secondary-light: #F44336;
-    --secondary-dark: #B71C1C;
+    --secondary-dark: #B93500;
     --fontbiggest: 20px;
     --fontbigger: 18px;
     --fontbig: 16px;
@@ -34,11 +34,18 @@ body {
     min-height: 100%;
 }
 
-header {
-    margin: 0 auto;
-    max-width: 800px;
-    padding: 20px 10px;
+header .container, body .container {
+    max-width: 840px;
+    margin: 20px auto;
     width: 100%;
+}
+
+header .container .card, main .container .card {
+    border: 1px solid var(--lighter);
+    border-radius: 3px;
+    background: var(--lighter);
+    box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+    padding: 20px;
 }
 
 header h1 {
@@ -59,40 +66,44 @@ input, button {
     outline: none;
 }
 
-#new-task-input {
-    background: var(--lighter);
-    border-radius: 4px;
-    flex: 1 1 0%;
-    font-size: var(--fontbig);
-    padding: 10px;
+input {
+    padding: 10px 5px;
 }
 
-#new-task-input, #new-task-input::placeholder {
+#new-task-input, .task-list .content input:not(:read-only) {
+    border-top: 1px solid transparent;
+    border-right: 1px solid transparent;
+    border-bottom: 2px double var(--light);
+    border-left: 1px solid transparent;
+    border-radius: 3px;
     color: var(--darker);
+    flex: 1 1 0%;
+    font-size: var(--fontbig);
+    transition: 0.2s;
+}
+
+#new-task-input::placeholder {
+    color: var(--light);
 }
 
 #new-task-submit {
     align-items: center;
     background: var(--primary);
-    border: 1px solid var(--primary);
-    border-radius: 4px;
-    color: var(--lightest);
+    border: 1px solid transparent;
+    border-radius: 3px;
+    color: var(--gwhite);
     cursor: pointer;
     display: flex;
     flex-direction: row;
     font-size: var(--fontbigger);
     font-weight: var(--fontwlarge);
-    margin-left: 10px;
-    padding: 10px;
+    margin-left: 20px;
+    padding: 5px 10px;
     transition: 0.2s;
 }
 
-#new-task-submit div, .task-list button div {
-    align-items: center;
-    display: flex;
-}
-
 #new-task-submit:hover {
+    border: 1px solid var(--primary);
     background: var(--primary-light);
 }
 
@@ -100,44 +111,55 @@ input, button {
     background: var(--primary-dark);
 }
 
+#new-task-input:hover, #new-task-input:focus,
+.task-list .content input:not(:read-only):focus,
+.task-list .content input:not(:read-only):hover {
+    background: var(--gwhite);
+    border-top: 1px solid var(--light);
+    border-left: 1px solid var(--light);
+    border-right: 1px solid var(--light);
+    border-bottom: 2px solid var(--primary-light);
+}
+
+#new-task-submit .material-icons {
+    font-size: var(--fontbiggest);
+}
+
+#new-task-submit div, .task-list button div {
+    align-items: center;
+    display: flex;
+}
+
 #new-task-submit .material-icons, .task-list button .material-icons {
     margin-right: 5px;
 }
 
-main {
-    flex: 1 1 0%;
-    max-width: 800px;
-    margin: 0 auto;
-    padding: 20px 10px;
-    width: 100%;
-}
-
-
 .task-list .task {
     align-items: center;
-    background: var(--light);
-    border-radius: 4px;
+    border-left: 1px solid var(--light);
     display: flex;
     font-size: var(--fontbig);
     justify-content: space-between;
-    margin-bottom: 10px;
-    padding: 10px;
+    padding-left: 20px;
+}
+
+.task-list .task:not(:last-child) {
+    margin-bottom: 20px;
 }
 
 .task-list .content {
-    width: 100%;
+    align-self: stretch;
+    display: flex;
+    flex: 1 1 0%;
+    margin-right: 20px;
 }
 
-.task-list .content input, .task-list .content input::placeholder {
-    color: var(--darkest);
-    font-size: var(--fontbigger);
-    width: 100%;
+.task-list .content input {
+    border: 1px solid transparent;
+    color: var(--darker);
+    flex: 1 1 0%;
+    font-size: var(--fontbig);
 }
-
-.task-list .content input:not(:read-only) {
-    color: var(--secondary);
-}
-
 
 .task-list h2 {
     color: var(--darker);
@@ -148,18 +170,17 @@ main {
 
 .task .actions {
     display: flex;
-    flex: row;
 }
 
 .task .actions button:not(:first-child) {
-    margin-left: 5px;
+    margin-left: 20px;
 }
 
 .task-list button {
     background: var(--secondary);
     border: 1px solid var(--secondary);
-    border-radius: 4px;
-    color: var(--lightest);
+    border-radius: 3px;
+    color: var(--gwhite);
     cursor: pointer;
     font-size: var(--fontbig);
     font-weight: var(--fontwlarge);
@@ -177,18 +198,66 @@ main {
 }
 
 .task-list button .material-icons {
-    font-size: var(--fontbiggest);
+    font-size: var(--fontbigger);
 }
 
 .task-list .actions button.save {
     background: var(--primary);
-    border: 1px solid var(--primary);
+    border: 1px solid transparent;
 }
 
 .task-list .actions button.save:hover {
     background: var(--primary-light);
+    border: 1px solid var(--primary);
 }
 
 .task-list .actions button.save:active {
     background: var(--primary-dark);
+    border: 1px solid var(--primary);
+}
+
+@media (max-width: 600px) {
+    header .container {
+        margin: 0;
+    }
+
+    header .container .card, main .container .card {
+        padding: 20px 10px;
+    }
+    
+    #new-task-form {
+        display: flex;
+        flex-direction: column;
+    }
+
+    #new-task-submit {
+        align-self: end;
+        margin-left: 0;
+    }
+
+    .task-list .task {
+        align-items: stretch;
+        flex-direction: column;
+        padding-left: 10px;
+    }
+
+    .task .content {
+        margin-right: 0;
+    }
+
+    .task .content input, #new-task-input {
+        margin-bottom: 20px;
+    }
+
+    .task .content input:not(:read-only) {
+        background: var(--gwhite);
+        border-top: 1px solid var(--light);
+        border-left: 1px solid var(--light);
+        border-right: 1px solid var(--light);
+        border-bottom: 2px solid var(--primary-light);
+    }
+
+    .task .actions {
+        justify-content: flex-end;
+    }
 }
