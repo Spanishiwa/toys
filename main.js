@@ -6,8 +6,8 @@ window.addEventListener('load', () => {
     form.addEventListener('submit', (e) => {
         e.preventDefault();
         const task = input.value;
-
-        if (input.reportValidity) {
+        
+        if (input.reportValidity()) {
             const task_el = create_task_list_el(task);
     
             tasks_list_el.appendChild(task_el);
@@ -81,8 +81,12 @@ const create_task_btn_events = (task_el) => {
             task_edit_btn.classList.remove('save');
         }
     });
-
+    
     task_del_btn.addEventListener('click', () => {
-        task_lists_el.removeChild(task_el);
+        task_el.addEventListener('transitionend', () => {
+            task_lists_el.removeChild(task_el);
+        });
+
+        task_el.classList.add('falling');
     });
 };
