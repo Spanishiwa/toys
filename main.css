@@ -28,6 +28,7 @@
 
 body {
     background: var(--lightest);
+    background-image: url('./img/skelatal_weave.png');
     color: var(--light);
     display: flex;
     flex-direction: column;
