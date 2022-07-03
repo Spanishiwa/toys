@@ -26,6 +26,10 @@
     font-family: 'Roboto', sans-serif;
 }
 
+ul, ol {
+    padding: 0px;
+}
+
 body {
     background: var(--lightest);
     background-image: url('./img/skelatal_weave.png');
@@ -110,6 +114,62 @@ input {
 
 #new-task-submit:active {
     background: var(--primary-dark);
+}
+
+.autofilll-wrapper {
+    display: flex;
+    flex-direction: column;
+    margin: 20px auto;
+}
+
+#autofill {
+    border-top: 1px solid transparent;
+    border-right: 1px solid transparent;
+    border-bottom: 2px double var(--light);
+    border-left: 1px solid transparent;
+    border-radius: 3px;
+    color: var(--darker);
+    flex: 1 1 0%;
+    font-size: var(--fontbig);
+    transition: 0.2s;
+}
+
+#autofill:hover, #autofill:focus {
+    background: var(--gwhite);
+    border-top: 1px solid var(--light);
+    border-left: 1px solid var(--light);
+    border-right: 1px solid var(--light);
+    border-bottom: 2px solid var(--primary-light);
+}
+
+.suggestions {
+    background: var(--gwhite);
+    border: 1px solid var(--light);
+    border-radius: 3px;
+    list-style: none;
+}
+
+.suggestions li {
+    border: 1px solid transparent;
+    cursor: pointer;
+    padding: 10px 5px;
+}
+
+.suggestions li:not(:first-child) {
+    border-top: 1px solid var(--lighter);
+}
+
+.suggestions li:hover {
+    background: var(--lightest);
+}
+
+.suggestions li:active {
+    border-top: 1px dashed var(--light);
+    border-bottom: 1px dashed var(--light);
+}
+
+.suggestions li:not(:first-child) {
+    padding-top: 10px;
 }
 
 #new-task-input:hover, #new-task-input:focus,
